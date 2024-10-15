@@ -14,9 +14,10 @@ class YahtzeePlayer{
         int ones, twos, threes, fours, fives, sixes;
         int threeOfAKind, fourOfAKind, fullHouse, smallStaight, largeStraight, yahtzee, yahtzeeBonus, Chance;
         int upperTotal, lowerTotal, total;
-        char chooseScore(int d1, int d2, int d3, int d4, int d5);
+        void chooseScore(int d1, int d2, int d3, int d4, int d5);
         YahtzeePlayer * turnorder;
     public:
+        string name;
         int turnsToGo = 13;
         bool computer;
         void Pturn();
@@ -24,8 +25,6 @@ class YahtzeePlayer{
         void endGame();
         YahtzeePlayer(int numPlayers, bool &computerPlayer);
 };
-
-void round(int numPlayers);
 
 void endgame(int numPlayers);
 
