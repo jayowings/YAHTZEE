@@ -1,18 +1,70 @@
 void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functions
-    int d1, d2, d3, d4, d5;
-    //TODO
-    if(d1 == d2 && d2 == d3 && d3 == d4 && d4 == d5){
-        Yahtzee();
-        // endturn switch
+    Dice d1, d2, d3, d4, d5;
+    int i = 0;
+    for(i; i < 3; i++){
+        if(d1.save != true){
+            d1.roll();
+        }
+        if(d2.save != true){
+            d2.roll();
+        }
+        if(d3.save != true){
+            d3.roll();
+        }
+        if(d4.save != true){
+            d4.roll();
+        }
+        if(d5.save != true){
+            d5.roll();
+        }
+        char s1, s2, s3, s4, s5;
+        cout << d1.value << " " << d2.value << " " << d3.value << " " << d4.value << " " << d5.value << endl;
+        if(i == 2){
+            break;
+        }else{
+            cout << "Push Y/N for each dice to save it (No spaces, e.g. YNYYN)" << endl;
+            cin >> s1, s2, s3, s4, s5;
+            if(s1 == 'Y'){
+                d1.save = true;
+            }else{
+                d1.save = false;
+            }if(s2 == 'Y'){
+                d2.save = true;
+            }else{
+                d2.save = false;
+            }if(s3 == 'Y'){
+                d3.save = true;
+            }else{
+                d3.save = false;
+            }if(s4 == 'Y'){
+                d4.save = true;
+            }else{
+                d4.save = false;
+            }if(s5 == 'Y'){
+                d5.save = true;
+            }else{
+                d5.save = false;
+            }
+            if(s1 == 'Y' && s2 == 'Y' && s3 == 'Y' && s4 == 'Y' && s5 == 'Y'){
+                break;
+            }
+        }
     }
-    //TODO place score somewhere
+    char x = chooseScore(d1.value, d2.value, d3.value, d4.value, d5.value);
+    if(turnorder->computer){
+        turnorder->Cturn();
+    }else{
+        turnorder->Pturn();
+    }
 };
 
 void YahtzeePlayer::endGame(){
 
 }; //calculating totals
 
-void YahtzeePlayer::Yahtzee(){}; //if Yahtzee = null, Yahtzee can be set to 50, if Yahtzee = 0, Yahtzee is not an option, if Yahtzee = 50, yahtzeeBonus += 100 and add score elsewhere
+char YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
+
+};
 
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
     if (numPlayers > 1){
@@ -33,6 +85,10 @@ void playYahtzee(int numPlayers, bool computerPlayer){
 
 
 void YahtzeePlayer::Cturn(){
+
+};
+
+int Dice::roll(){
 
 };
 
