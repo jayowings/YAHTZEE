@@ -60,7 +60,13 @@ void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functi
 };
 
 void YahtzeePlayer::endGame(){
-
+    upperTotal = ones + twos + threes + fours + fives + sixes;
+    if(upperTotal >= 63){
+        upperTotal += UPPERBONUS;
+    }
+    lowerTotal = threeOfAKind + fourOfAKind + fullHouse + smallStaight + largeStraight + yahtzee + yahtzeeBonus + Chance;
+    total = upperTotal + lowerTotal;
+    cout << upperTotal << endl << lowerTotal << endl << total;
 }; //calculating totals
 
 char YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
