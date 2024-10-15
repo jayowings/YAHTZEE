@@ -66,7 +66,29 @@ void YahtzeePlayer::endGame(){
     }
     lowerTotal = threeOfAKind + fourOfAKind + fullHouse + smallStaight + largeStraight + yahtzee + yahtzeeBonus + Chance;
     total = upperTotal + lowerTotal;
-    cout << upperTotal << endl << lowerTotal << endl << total;
+    cout << setw(16) << left << name << endl;
+    cout << "Ones:_____________" << ones << endl;
+    cout << "Twos:____________" << setw(2) << left << setfill('_') << twos << endl;
+    cout << "Threes:__________" << setw(2) << left << setfill('_') << threes << endl;
+    cout << "Fours:___________" << setw(2) << left << setfill('_') << fours << endl;
+    cout << "Fives:___________" << setw(2) << left << setfill('_') << fives << endl;
+    cout << "Sixes:___________" << setw(2) << left << setfill('_') << sixes << endl;
+    if(upperTotal > 63){
+        cout << "BONUS!!" << endl;
+    }
+    cout << "Upper Total:____" << setw(3) << left << setfill('_') << upperTotal << endl;
+    cout << "Three of a Kind:_" << setw(2) << left << setfill('_') << threeOfAKind << endl;
+    cout << "Four of a Kind:__" << setw(2) << left << setfill('_') << fourOfAKind << endl;
+    cout << "Full House:______" << setw(2) << left << setfill('_') << fullHouse << endl;
+    cout << "SM Straight:_____" << setw(2) << left << setfill('_') << smallStaight << endl;
+    cout << "LG Straight:_____" << setw(2) << left << setfill('_') << largeStraight << endl;
+    cout << "Yahtzee:_________" << setw(2) << left << setfill('_') << yahtzee << endl;
+    if(yahtzee != 0){
+        cout << "Yahtzee Bonus:___" << setw(3) << left << setfill('_') << yahtzeeBonus << endl;
+    }
+    cout << "Chance:__________" << setw(2) << left << setfill('_') << Chance << endl;
+    cout << "Lower Total:____" << setw(3) << left << setfill('_') << lowerTotal << endl;
+    cout << "Total:_________" << setw(4) << left << setfill('_') << total << endl;
 }; //calculating totals
 
 void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
