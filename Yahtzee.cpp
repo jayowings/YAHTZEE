@@ -24,28 +24,29 @@ void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functi
         }else{
             cout << "Push Y/N for each dice to save it (No spaces, e.g. YNYYN)" << endl;
             cin >> s1, s2, s3, s4, s5;
-            if(s1 == 'Y'){
+
+            if((char) toupper(s1) == 'Y'){
                 d1.save = true;
             }else{
                 d1.save = false;
-            }if(s2 == 'Y'){
+            }if((char) toupper(s2) == 'Y'){
                 d2.save = true;
             }else{
                 d2.save = false;
-            }if(s3 == 'Y'){
+            }if((char) toupper(s3) == 'Y'){
                 d3.save = true;
             }else{
                 d3.save = false;
-            }if(s4 == 'Y'){
+            }if((char) toupper(s4) == 'Y'){
                 d4.save = true;
             }else{
                 d4.save = false;
-            }if(s5 == 'Y'){
+            }if((char) toupper(s5) == 'Y'){
                 d5.save = true;
             }else{
                 d5.save = false;
             }
-            if(s1 == 'Y' && s2 == 'Y' && s3 == 'Y' && s4 == 'Y' && s5 == 'Y'){
+            if((char) toupper(s1) == 'Y' && (char) toupper(s2) == 'Y' && (char) toupper(s3) == 'Y' && (char) toupper(s4) == 'Y' && (char) toupper(s5) == 'Y'){
                 break;
             }
         }
@@ -89,7 +90,7 @@ void YahtzeePlayer::Cturn(){
 };
 
 int Dice::roll(){
-
+    this->value = rand() % 6;
 };
 
 

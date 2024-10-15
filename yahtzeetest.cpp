@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 #include "Yahtzee.h"
 
 using namespace std;
