@@ -650,14 +650,49 @@ void YahtzeePlayer::Cturn(){
                 d5.value = temp;
             }
         }
-        //Decide which dice to save
+        //TODO Decide which dice to save
+        if(d1.value == d5.value){//Yahtzee
+            break;
+        }else if(d2.value == d5.value && d1.value){//Four of a Kind, hoping for Yahtzee
+            d2.save = true;
+            d3.save = true;
+            d4.save = true;
+            d5.save = true;
+        }else if(d1.value == d4.value){//Four of a kind, hoping for Yahtzee
+            d1.save = true;
+            d2.save = true;
+            d3.save = true;
+            d4.save = true;
+        }else if(d1.value == d2.value && d3.value == d5.value){//Full House
+            break;
+        }else if(d2.value + 1 == d3.value && d3.value + 1 == d4.value && (d1.value + 1 == d2.value || d4.value + 1 == d5.value) && (largeStraight == -1 || smallStraight == -1)){
+            if(d1.value + 1 == d2.value && d4.value + 1 == d5.value){
+                break;
+            }else if(d1.value + 1 != d2.value){//Try for Large Straight regardless
+                d2.save = true;
+                d3.save = true;
+                d4.save = true;
+                d5.save = true;
+            }else{
+                d2.save = true;
+                d3.save = true;
+                d4.save = true;
+                d1.save = true;
+            }
+        }else if(d5.value == 6 || d5.value == 5){
+            d5.save = true;
+            if(d4.value == 6 || d4.value == 5){
+                d4.save = true;
+                if(d3.value == 6 || d3.value == 5){
+                    d3.save == true;
+            }
+        }
     }
-    int dice1 = d1.value, dice2 = d2.value, dice3 = d3.value, dice4 = d4.value, dice5 = d5.value;
     bool endTurn = false;
     bool TP = false, FP = false;
     //Decide which score to take
-    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) && (largeStraight == -1 || smallStraight == -1)){
-        if(d1 + 1 == d2 && d4 + 1 == d5 && largeStraight == -1){
+    if(d2.value + 1 == d3.value && d3.value + 1 == d4.value && (d1.value + 1 == d2.value || d4.value + 1 == d5.value) && (largeStraight == -1 || smallStraight == -1)){
+        if(d1.value + 1 == d2.value && d4.value + 1 == d5.value && largeStraight == -1){
             largeStraight = LGSTRAIGHT; //Large Straight
             endTurn = true;
         }else if(smallStraight == -1){
@@ -666,10 +701,10 @@ void YahtzeePlayer::Cturn(){
         }
     }
     int total = d1.value + d2.value + d3.value + d4.value + d5.value;
-    if(d1 == d2){
-        if(d2 == d3){
-            if(d3 == d4){
-                if(d4 == d5){
+    if(d1.value == d2.value){
+        if(d2.value == d3.value){
+            if(d3.value == d4.value){
+                if(d4.value == d5.value){
                     //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
                         // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
                     cout << "YAHTZEE!!"
@@ -698,7 +733,7 @@ void YahtzeePlayer::Cturn(){
             //offer three of a kind
             if(!endTurn){
                 //Full house (d4 == d5)
-                if(d4 == d5 && fullHouse == -1){
+                if(d4.value == d5.value && fullHouse == -1){
                         fullHouse = FULLHOUSE;
                         endTurn = true;
                 }
@@ -715,14 +750,14 @@ void YahtzeePlayer::Cturn(){
         }
         if(!endTurn){
             //Full house (d3 == d4 == d5)
-            if(d3 == d4 && d4 == d5 && fullHouse == -1){
+            if(d3.value == d4.value && d4.value == d5.value && fullHouse == -1){
                 fullHouse = FULLHOUSE;
                 endTurn = true;
             }
         }
-    }else if(d2 == d3){
-        if(d3 == d4){
-            if(d4 == d5){
+    }else if(d2.value == d3.value){
+        if(d3.value == d4.value){
+            if(d4.value == d5.value){
                 //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                 if(fourOfAKindt == -1){
                     if(total >= 20){
@@ -745,8 +780,8 @@ void YahtzeePlayer::Cturn(){
                 }
             }
         }
-    }else if(d3 == d4){
-        if(d4 == d5){
+    }else if(d3.value == d4.value){
+        if(d4.value == d5.value){
             //three of a kind
             if(threeOfAKind == -1){
                 if(total >= 18){
@@ -761,89 +796,89 @@ void YahtzeePlayer::Cturn(){
     
     if(!endTurn){
         int o, t, T, f, F, s;
-        switch (d1){
+        switch (d1.value){
             case 1:{
-                o += d1;
+                o += d1.value;
                 break;
             }case 2:{
-                t += d1;
+                t += d1.value;
                 break;
             }case 3:{
-                T += d1;
+                T += d1.value;
                 break;
             }case 4:{
-                f += d1;
+                f += d1.value;
                 break;
             }default:{
-                (d1 == 5) ? (F += d1) : (s += d1);
+                (d1.value == 5) ? (F += d1.value) : (s += d1.value);
             }
         }
-        switch (d2){
+        switch (d2.value){
             case 1:{
-                o += d2;
+                o += d2.value;
                 break;
             }case 2:{
-                t += d2;
+                t += d2.value;
                 break;
             }case 3:{
-                T += d2;
+                T += d2.value;
                 break;
             }case 4:{
-                f += d2;
+                f += d2.value;
                 break;
             }default:{
-                (d2 == 5) ? (F += d2) : (s += d2);
+                (d2.value == 5) ? (F += d2.value) : (s += d2.value);
             }
         }
-        switch (d3){
+        switch (d3.value){
             case 1:{
-                o += d3;
+                o += d3.value;
                 break;
             }case 2:{
-                t += d3;
+                t += d3.value;
                 break;
             }case 3:{
-                T += d3;
+                T += d3.value;
                 break;
             }case 4:{
-                f += d3;
+                f += d3.value;
                 break;
             }default:{
-                (d3 == 5) ? (F += d3) : (s += d3);
+                (d3.value == 5) ? (F += d3.value) : (s += d3.value);
             }
         }
-        switch (d4){
+        switch (d4.value){
             case 1:{
-                o += d4;
+                o += d4.value;
                 break;
             }case 2:{
-                t += d4;
+                t += d4.value;
                 break;
             }case 3:{
-                T += d4;
+                T += d4.value;
                 break;
             }case 4:{
-                f += d4;
+                f += d4.value;
                 break;
             }default:{
-                (d4 == 5) ? (F += d4) : (s += d4);
+                (d4.value == 5) ? (F += d4.value) : (s += d4.value);
             }
         }
-        switch (d5){
+        switch (d5.value){
             case 1:{
-                o += d5;
+                o += d5.value;
                 break;
             }case 2:{
-                t += d5;
+                t += d5.value;
                 break;
             }case 3:{
-                T += d5;
+                T += d5.value;
                 break;
             }case 4:{
-                f += d5;
+                f += d5.value;
                 break;
             }default:{
-                (d5 == 5) ? (F += d5) : (s += d5);
+                (d5.value == 5) ? (F += d5.value) : (s += d5.value);
             }
         }
         if(s >= 18 && sixes == -1){
