@@ -1,3 +1,4 @@
+//remove includes
 #include <iostream>
 using namespace std;
 #include "Yahtzee.h"
@@ -608,5 +609,321 @@ void playYahtzee(int numPlayers, bool computerPlayer){
 
 
 void YahtzeePlayer::Cturn(){
+    cout << "Computer turn!" << endl;
+    Dice d1, d2, d3, d4, d5;
+    int i = 0, temp;
+    for(i; i < 3; i++){
+        if(d1.save != true){//if the dice has not been saved, roll it
+            d1.roll();
+        }
+        if(d2.save != true){
+            d2.roll();
+        }
+        if(d3.save != true){
+            d3.roll();
+        }
+        if(d4.save != true){
+            d4.roll();
+        }
+        if(d5.save != true){
+            d5.roll();
+        }
+        while(d1.value > d2.value || d2.value > d3.value || d3.value > d4.value || d4.value > d5.value){ //Sort dice for easier manipulation
+            if(d1.value > d2.value){
+                temp = d1.value;
+                d1.value = d2.value;
+                d2.value = temp;
+            }
+            if(d2.value > d3.value){
+                temp = d2.value;
+                d2.value = d3.value;
+                d3.value = temp;
+            }
+            if(d3.value > d4.value){
+                temp = d3.value;
+                d3.value = d4.value;
+                d4.value = temp;
+            }
+            if(d4.value > d5.value){
+                temp = d4.value;
+                d4.value = d5.value;
+                d5.value = temp;
+            }
+        }
+        //Decide which dice to save
+    }
+    int dice1 = d1.value, dice2 = d2.value, dice3 = d3.value, dice4 = d4.value, dice5 = d5.value;
+    bool endTurn = false;
+    bool TP = false, FP = false;
+    //Decide which score to take
+    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) && (largeStraight == -1 || smallStraight == -1)){
+        if(d1 + 1 == d2 && d4 + 1 == d5 && largeStraight == -1){
+            largeStraight = LGSTRAIGHT; //Large Straight
+            endTurn = true;
+        }else if(smallStraight == -1){
+            smallStraight = SMSTRAIGHT; //SM Straight
+            endTurn = true;
+        }
+    }
+    int total = d1.value + d2.value + d3.value + d4.value + d5.value;
+    if(d1 == d2){
+        if(d2 == d3){
+            if(d3 == d4){
+                if(d4 == d5){
+                    //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
+                        // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
+                    cout << "YAHTZEE!!"
+                    if(yahtzee == -1){
+                        yahtzee = YAHTZEE;
+                        endTurn = true;
+                    }
+                    else if(yahtzee == 50){
+                        yahtzeeBonus += BONUS;
+                    }
+                }
+                if(!endTurn){
+                    //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
+                    if(fourOfAKindt == -1){
+                        if(total >= 20){
+                            fourOfAKind = total;
+                            endTurn = true;
+                        }else{
+                            FP = true;
+                        }
+                    }
+                }
+            }
+            //if three dice are the same:
+            //check full house. (if available, offer and end turn if chosen)
+            //offer three of a kind
+            if(!endTurn){
+                //Full house (d4 == d5)
+                if(d4 == d5 && fullHouse == -1){
+                        fullHouse = FULLHOUSE;
+                        endTurn = true;
+                }
+                //three of a kind
+                if(threeOfAKind == -1){
+                    if(total >= 18){
+                        threeOfAKind = total;
+                        endTurn = true;
+                    }else{
+                        TP = true;
+                    }
+                }
+            }
+        }
+        if(!endTurn){
+            //Full house (d3 == d4 == d5)
+            if(d3 == d4 && d4 == d5 && fullHouse == -1){
+                fullHouse = FULLHOUSE;
+                endTurn = true;
+            }
+        }
+    }else if(d2 == d3){
+        if(d3 == d4){
+            if(d4 == d5){
+                //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
+                if(fourOfAKindt == -1){
+                    if(total >= 20){
+                        fourOfAKind = total;
+                        endTurn = true;
+                    }else{
+                        FP = true;
+                    }
+                }
+                if(!endTurn){
+                //three of a kind
+                    if(threeOfAKind == -1){
+                        if(total >= 18){
+                            threeOfAKind = total;
+                            endTurn = true;
+                        }else{
+                            TP = true;
+                        }
+                    }
+                }
+            }
+        }
+    }else if(d3 == d4){
+        if(d4 == d5){
+            //three of a kind
+            if(threeOfAKind == -1){
+                if(total >= 18){
+                    threeOfAKind = total;
+                    endTurn = true;
+                }else{
+                    TP = true;
+                }
+            }
+        }
+    }
+    
+    if(!endTurn){
+        int o, t, T, f, F, s;
+        switch (d1){
+            case 1:{
+                o += d1;
+                break;
+            }case 2:{
+                t += d1;
+                break;
+            }case 3:{
+                T += d1;
+                break;
+            }case 4:{
+                f += d1;
+                break;
+            }default:{
+                (d1 == 5) ? (F += d1) : (s += d1);
+            }
+        }
+        switch (d2){
+            case 1:{
+                o += d2;
+                break;
+            }case 2:{
+                t += d2;
+                break;
+            }case 3:{
+                T += d2;
+                break;
+            }case 4:{
+                f += d2;
+                break;
+            }default:{
+                (d2 == 5) ? (F += d2) : (s += d2);
+            }
+        }
+        switch (d3){
+            case 1:{
+                o += d3;
+                break;
+            }case 2:{
+                t += d3;
+                break;
+            }case 3:{
+                T += d3;
+                break;
+            }case 4:{
+                f += d3;
+                break;
+            }default:{
+                (d3 == 5) ? (F += d3) : (s += d3);
+            }
+        }
+        switch (d4){
+            case 1:{
+                o += d4;
+                break;
+            }case 2:{
+                t += d4;
+                break;
+            }case 3:{
+                T += d4;
+                break;
+            }case 4:{
+                f += d4;
+                break;
+            }default:{
+                (d4 == 5) ? (F += d4) : (s += d4);
+            }
+        }
+        switch (d5){
+            case 1:{
+                o += d5;
+                break;
+            }case 2:{
+                t += d5;
+                break;
+            }case 3:{
+                T += d5;
+                break;
+            }case 4:{
+                f += d5;
+                break;
+            }default:{
+                (d5 == 5) ? (F += d5) : (s += d5);
+            }
+        }
+        if(s >= 18 && sixes == -1){
+            sixes = s;
+            endTurn = true;
+        }else if(F >= 15 && fives == -1){
+            fives = F;
+            endTurn = true;
+        }else if(f >= 12 && fours == -1){
+            fours = f;
+            endTurn = true;
+        }else if(T >= 9 && threes == -1){
+            threes = T;
+            endTurn = true;
+        }else if(t >= 8 && twos == -1){
+            twos = t;
+            endTurn = true;
+        }else if(o >= 4 && ones == -1){
+            ones = o;
+            endTurn = true;
+        }else if(chance == 0 && total >= 20){
+            chance = total;
+            endTurn = true;
+        }
+    }
 
+    if(!endTurn){
+        if(FP){
+            fourOfAKind = total;
+            endTurn = true;
+        }else if(TP){
+            threeOfAKind = total;
+            endTurn = true;
+        }else if(ones == -1){
+            ones = o;
+            endTurn = true;
+        }else if(twos == -1){
+            twos = t;
+            endTurn = true;
+        }else if(threes == -1 && sixes + fives + fours >= 18 + 15 + 12 && T > 3){
+            threes = T;
+            endTurn = true;
+        }else if(total >= 15 && chance == 0){
+            chance = total;
+            endTurn = true;
+        }else if(yahtzee == -1){
+            yahtzee = FAIL;
+            entTurn = true;
+        }else if(total >= 10 && chance == 0){
+            chance = total;
+            endTurn = true;
+        }else if(fours == -1 && sixes + fives >= 33 && f > 4){
+            fours = f;
+            endTurn = true;
+        }else if(threes == -1){
+            threes = T;
+            endTurn = true;
+        }else if(largeStraight == -1){
+            largeStraight = FAIL;
+            endTurn = true;
+        }else if(smallStraight == -1){
+            smallStraight = FAIL;
+            endTurn = true;
+        }else if(fours == -1){
+            fours = f;
+            endTurn = true;
+        }else if(fullHouse ==-1 ){
+            fullHouse = FAIL;
+            endTurn = true;
+        }else if(chance == -1){
+            chance == total;
+            endTurn = true;
+        }else if(fives == -1){
+            fives = F;
+            endTurn = true;
+        }else if(sixes == -1){
+            sixes = s;
+            endTurn = true;
+        }else{
+            cout << "Houston, we have a problem";
+        }
+    }
 };
