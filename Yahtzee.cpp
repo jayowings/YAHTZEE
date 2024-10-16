@@ -607,7 +607,6 @@ void playYahtzee(int numPlayers, bool computerPlayer){
     Game1.endGame();
 }
 
-
 void YahtzeePlayer::Cturn(){
     cout << "Computer turn!" << endl;
     Dice d1, d2, d3, d4, d5;
@@ -679,12 +678,39 @@ void YahtzeePlayer::Cturn(){
                 d4.save = true;
                 d1.save = true;
             }
-        }else if(d5.value == 6 || d5.value == 5){
+        }else if(d1.value == d3.value || d2.value == d4.value || d3.value == d5.value){ //try for full house/three of a kind/four of a kind
+            if(d1.value == d3.value && d4.value <5){
+                d1.save = true;
+                d2.save = true;
+                d3.save = true;
+                if(d5.value > 4){
+                    d5.save = true;
+                }
+            }else if(d2.value == d4.value){
+                d2.save = true;
+                d3.save = true;
+                d4.save = true;
+                if(d5.value > 4){
+                    d5.save = true;
+                }
+            }else if(d3.value == d5.value){
+                d3.save = true;
+                d4.save = true;
+                d5.save = true;
+                if(d2.value > 4){
+                    d2.save = true;
+                }
+            }
+        }else if(d5.value == 6 || d5.value == 5){ //save high values
             d5.save = true;
             if(d4.value == 6 || d4.value == 5){
                 d4.save = true;
-                if(d3.value == 6 || d3.value == 5){
+                if(d3.value == 5){
                     d3.save == true;
+                    if(d2.value == 5){
+                        d2.save == true;
+                    }
+                }
             }
         }
     }
