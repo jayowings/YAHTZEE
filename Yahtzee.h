@@ -20,8 +20,6 @@ class YahtzeePlayer{
         YahtzeePlayer(int numPlayers, bool &computerPlayer);
 };
 
-void endgame(int numPlayers);
-
 void playYahtzee(int numPlayers, bool computerPlayer);
 
 #include "Yahtzee.cpp"
