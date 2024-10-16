@@ -1,3 +1,5 @@
+#include "Yahtzee.h"
+
 void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functions
     cout << name << ", your turn!" << endl;
     Dice d1, d2, d3, d4, d5;
@@ -93,6 +95,29 @@ void YahtzeePlayer::endGame(){
 
 void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
     //sort dice in ascending order with temp variables. check sm straight or lg straight (if available, set and end turn)
+    int temp;
+    while(d1 > d2 || d2 > d3 || d3 > d4 || d4 > d5){
+        if(d1 > d2){
+            temp = d1;
+            d1 = d2;
+            d2 = temp;
+        }
+        if(d2 > d3){
+            temp = d2;
+            d2 = d3;
+            d3 = temp;
+        }
+        if(d3 > d4){
+            temp = d3;
+            d3 = d4;
+            d4 = temp;
+        }
+        if(d4 > d5){
+            temp = d4;
+            d4 = d5;
+            d5 = temp;
+        }
+    }
     //check number of same type dice
         //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
             // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
