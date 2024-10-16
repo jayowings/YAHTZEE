@@ -16,6 +16,7 @@ class YahtzeePlayer{
         int upperTotal, lowerTotal, total;
         void chooseScore(int d1, int d2, int d3, int d4, int d5);
         YahtzeePlayer * turnorder;
+        bool endPlayer;
     public:
         string name;
         int turnsToGo = 13;

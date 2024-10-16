@@ -54,7 +54,7 @@ void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functi
     chooseScore(d1.value, d2.value, d3.value, d4.value, d5.value);
     if(turnorder->computer){//Computer turn will have its own logic
         turnorder->Cturn();
-    }else{
+    }else if(!endPlayer){
         turnorder->Pturn();//each player will take their turn in order, 
     }
 };
@@ -114,7 +114,11 @@ YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
     }else{
         computer = computerPlayer;
         computerPlayer = false;
-    }
+        if(computerPlayer != true){
+            cout << "Player name: ";
+            cin >> this->name;
+            endPlayer = true;
+        }
 }
 
 void playYahtzee(int numPlayers, bool computerPlayer){
