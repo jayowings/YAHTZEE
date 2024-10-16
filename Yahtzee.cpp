@@ -931,6 +931,7 @@ void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functi
 };
 
 void YahtzeePlayer::endGame(){
+    char done;
     upperTotal = ones + twos + threes + fours + fives + sixes;
     if(upperTotal >= 63){
         upperTotal += UPPERBONUS;
@@ -960,6 +961,10 @@ void YahtzeePlayer::endGame(){
     cout << "Chance:__________" << setw(2) << left << setfill('_') << Chance << endl;
     cout << "Lower Total:____" << setw(3) << left << setfill('_') << lowerTotal << endl;
     cout << "Total:_________" << setw(4) << left << setfill('_') << total << endl;
+    cin >> done;
+    if(!endPlayer){
+        turnorder->endgame();
+    }
 }; //calculating totals
 
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
