@@ -2,9 +2,10 @@
 #include <cctype>
 #include <string>
 #include <iomanip>
-#include "Yahtzee.h"
 
 using namespace std;
+
+#include "Yahtzee.h"
 
 int main(){
     bool computer;
