@@ -100,6 +100,8 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
     //sort dice in ascending order with temp variables. check sm straight or lg straight (if available, set and end turn)
     int temp;
     char takePoints;
+    bool TP = false, FP = false, FHP = false, SP = false, LP = false, YP = false;
+    int total = (d1 + d2 + d3 + d4 + d5);
     bool endTurn;
     while(d1 > d2 || d2 > d3 || d3 > d4 || d4 > d5){
         if(d1 > d2){
@@ -130,6 +132,11 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(takePoints != 'N' || takePoints != 'n'){
                 largeStraight = LGSTRAIGHT;
                 endTurn = true;
+            }else{
+                LP = true;
+                if(smallStraight == -1) {
+                    SP = true;
+                }
             }
             //LG Straight
         }else if(smallStraight == -1){
@@ -138,6 +145,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(takePoints != 'N' || takePoints != 'n'){
                 smallStraight = SMSTRAIGHT;
                 endTurn = true;
+            }else{
+                LP = false;
+                SP = true;
             }
             //SM Straight
         }
@@ -156,6 +166,8 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                         if(takePoints != 'N' || takePoints != 'n'){
                             yahtzee = YAHTZEE;
                             endTurn = true;
+                        }else{
+                            YP = true;
                         }
                     }
                     else if(yahtzee == 50){
@@ -168,11 +180,13 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 if(!endTurn){
                     //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                     if(fourOfAKindt == -1){
-                        cout << "Four of a kind! " << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                        cout << "Four of a kind! " << total << "points! Y/N";
                         cin >> takePoints;
                         if(takePoints != 'N' || takePoints != 'n'){
-                            fourOfAKind = (d1 + d2 + d3 + d4 + d5);
+                            fourOfAKind = total;
                             endTurn = true;
+                        }else{
+                            FP = true;
                         }
                     }
                 }
@@ -188,15 +202,19 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                     if(takePoints != 'N' || takePoints != 'n'){
                         fullHouse = FULLHOUSE;
                         endTurn = true;
+                    }else {
+                        FHP = true;
                     }
                 }
                 //three of a kind
                 if(threeOfAKind == -1){
-                    cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
+                    cout << "Three of a kind! " << total << "points! Y/N";
                     cin >> takePoints;
                     if(takePoints != 'N' || takePoints != 'n'){
-                        threeOfAKind = (d1+ d2 + d3 + d4 + d5);
+                        threeOfAKind = total;
                         endTurn = true;
+                    }else {
+                        TP = true;
                     }
                 }
             }
@@ -209,6 +227,8 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 if(takePoints != 'N' || takePoints != 'n'){
                     fullHouse = FULLHOUSE;
                     endTurn = true;
+                }else{
+                    FHP = true;
                 }
             }
         }
@@ -217,21 +237,26 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(d4 == d5){
                 //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                 if(fourOfAKind == -1){
-                    cout << "Four of a kind! " << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                    cout << "Four of a kind! " << total << "points! Y/N";
                     cin >> takePoints;
                     if(takePoints != 'N' || takePoints != 'n'){
-                        fourOfAKind = (d1 + d2 + d3 + d4 + d5);
+                        fourOfAKind = total;
                         endTurn = true;
+                    }else{
+                        FP = true;
                     }
                 }
-                if (!endTurn){
+                if(!endTurn){
                 //three of a kind
-                if(threeOfAKind == -1){
-                    cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
-                    cin >> takePoints;
-                    if(takePoints != 'N' || takePoints != 'n'){
-                        threeOfAKind = (d1+ d2 + d3 + d4 + d5);
-                        endTurn = true;
+                    if(threeOfAKind == -1){
+                        cout << "Three of a kind! " << total << "points! Y/N";
+                        cin >> takePoints;
+                        if(takePoints != 'N' || takePoints != 'n'){
+                            threeOfAKind = total;
+                            endTurn = true;
+                        }else{
+                            TP = true;
+                        }
                     }
                 }
             }
@@ -240,17 +265,199 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
         if(d4 == d5){
             //three of a kind
             if(threeOfAKind == -1){
-                cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
+                cout << "Three of a kind! " << total << "points! Y/N";
                 cin >> takePoints;
                 if(takePoints != 'N' || takePoints != 'n'){
-                    threeOfAKind = (d1+ d2 + d3 + d4 + d5);
+                    threeOfAKind = total;
                     endTurn = true;
+                }else{
+                    TP = true;
                 }
             }
         }
     }
-        //display dice again and offer availble from this list "(C)hance:(value) (O)nes:(value) (t)wos:(value) (T)hrees:(value) (f)ours:(value) (F)ives:(value) (S)ixes:(value) or (Z)ero"
+    if(!endTurn){//display dice again and offer availble from this list "(C)hance:(value) (O)nes:(value) (t)wos:(value) (T)hrees:(value) (f)ours:(value) (F)ives:(value) (S)ixes:(value) or (Z)ero"
             //if none above available or (Z)ero chosen, display all other available options and choose where to take a zero. Run logic again for zero taken to avoid unnecessarry zeros
+        int o, t, T, f, F, s;
+        switch (d1){
+            case 1:{
+                o += d1;
+                break;
+            }case 2:{
+                t += d1;
+                break;
+            }case 3:{
+                T += d1;
+                break;
+            }case 4:{
+                f += d1;
+                break;
+            }default:{
+                (d1 == 5) ? (F += d1) : (s += d1);
+            }
+        }
+        switch (d2){
+            case 1:{
+                o += d2;
+                break;
+            }case 2:{
+                t += d2;
+                break;
+            }case 3:{
+                T += d2;
+                break;
+            }case 4:{
+                f += d2;
+                break;
+            }default:{
+                (d2 == 5) ? (F += d2) : (s += d2);
+            }
+        }
+        switch (d3){
+            case 1:{
+                o += d3;
+                break;
+            }case 2:{
+                t += d3;
+                break;
+            }case 3:{
+                T += d3;
+                break;
+            }case 4:{
+                f += d3;
+                break;
+            }default:{
+                (d3 == 5) ? (F += d3) : (s += d3);
+            }
+        }
+        switch (d4){
+            case 1:{
+                o += d4;
+                break;
+            }case 2:{
+                t += d4;
+                break;
+            }case 3:{
+                T += d4;
+                break;
+            }case 4:{
+                f += d4;
+                break;
+            }default:{
+                (d4 == 5) ? (F += d4) : (s += d4);
+            }
+        }
+        switch (d5){
+            case 1:{
+                o += d5;
+                break;
+            }case 2:{
+                t += d5;
+                break;
+            }case 3:{
+                T += d5;
+                break;
+            }case 4:{
+                f += d5;
+                break;
+            }default:{
+                (d5 == 5) ? (F += d5) : (s += d5);
+            }
+        }
+        cout << d1 << ' ' << d2 << ' ' << d3 << ' ' << d4 << ' ' << d5 << endl;
+        bool available;
+        if(chance == 0){
+            cout << "(C)hance: " << total << ' ';
+            available = true;
+        }
+        if(ones == -1 && o != 0){
+            cout << "(o)nes: " << o << ' ';
+            available = true;
+        }
+        if(twos == -1 && t != 0){
+            cout << "(t)wos: " << t << ' ';
+            available = true;
+        }
+        if(threes == -1 && T != 0){
+            cout << "(T)hrees: " << T << ' ';
+            available = true;
+        }
+        if(fours == -1 && f != 0){
+            cout << "(f)ours: " << f << ' ';
+            available = true;
+        }
+        if(fives == -1 && F != 0){
+            cout << "(F)ives: " << F << ' ';
+            available = true;
+        }
+        if(sixes == -1 && s != 0){
+            cout << "(s)ixes: " << s << ' ';
+            available = true;
+        }
+        if(available == true){
+            cout << "or (Z)ero\n"
+            cin >> takePoints;
+        }else {takePoints = 'Z'};
+        switch (takePoints){
+            case 'C':{
+                if(chance == 0){
+                    cout << "Chance: " << total << ' points!' << endl;
+                    chance = total;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 'o':{
+                if(ones == -1 && o != 0){
+                    cout << "Ones: " << o << ' points!' << endl;
+                    ones = o;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 't':{
+                if(twos == -1 && t != 0){
+                    cout << "Twos: " << t << ' points!' << endl;
+                    twos = t;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 'T':{
+                if(threes == -1 && T != 0){
+                    cout << "Threes: " << T << ' points!' << endl;
+                    threes = T;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 'f':{
+                if(fours == -1 && f != 0){
+                    cout << "Fours: " << f << ' points!' << endl;
+                    fours = f;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 'F':{
+                if(fives == -1 && F != 0){
+                    cout << "Fives: " << F << ' points!' << endl;
+                    fives = F;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }case 's':{
+                if(sixes == -1 && s != 0){
+                    cout << "Sixes: " << s << ' points!' << endl;
+                    sixes = s;
+                }else{
+                    takePoints = 'Z';
+                }
+                break;
+            }
+        }
+    }
 };
 
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
