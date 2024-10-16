@@ -143,8 +143,58 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
         }
     }
     //check number of same type dice
-        //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
-            // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
+    if(d1 == d2){
+        if(d2 == d3){
+            if(d3 == d4){
+                if(d4 == d5){
+                    /*remove after not NULL logic complete*/
+                    int temp = yahtzee;
+
+                    //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
+                        // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
+                    cout << "YAHTZEE!!"
+                    /*if(yahtzee not NULL){*/
+                        cout << "50 points! Y/N";
+                        cin >> takePoints;
+                        if(takePoints != 'N' || takePoints != 'n'){
+                            yahtzee = YAHTZEE;
+                            endTurn = true;
+                        }
+                    //}
+                    /*else*/ if(/*yahtzee*/temp == 50){
+                        yahtzeeBonus += BONUS;
+                        cout << "BONUS 100 POINTS!!" << endl;
+                        endTurn = false;
+                    }//else if(yahtzee == 0){
+                        //cout << ":.-( so sad." << endl;
+                    //}
+                }
+                if(!endTurn){
+                    //four of a kind
+                }
+            }
+            if(!endTurn){
+                //Full house (d4 == d5)
+                //three of a kind
+            }
+        }
+        if(!endTurn){
+            //Full house (d3 == d4 == d5)
+        }
+    }else if(d2 == d3){
+        if(d3 == d4){
+            if(d4 == d5){
+                //four of a kind
+            }
+            if (!endTurn){
+                //three of a kind
+            }
+        }
+    }else if(d3 == d4){
+        if(d4 == d5){
+            //three of a kind
+        }
+    }
         //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
         //if three dice are the same:
             //check full house. (if available, offer and end turn if chosen)
