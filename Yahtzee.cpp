@@ -106,20 +106,21 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
 
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
     if (numPlayers > 1){
-        cout << "Player name: ";
-        cin >> this->name;
-        YahtzeePlayer next((numPlayers - 1), computerPlayer);
-        turnorder = &next;
+        cout << "Player name: "; //Get player name
+        cin >> name;
+        turnorder = new YahtzeePlayer((numPlayers - 1), computerPlayer); //Recursion to create last player first and set player order
         computer = false;
+        endPlayer = false;
     }else{
         computer = computerPlayer;
-        computerPlayer = false;
-        if(computerPlayer != true){
+        if(computer != true){ //If the last player is a computer, skip
             cout << "Player name: ";
-            cin >> this->name;
-            endPlayer = true;
+            cin >> name;
+            endPlayer = true; //Announce this is the last player
         }
-}
+        computerPlayer = false;
+    }
+};
 
 void playYahtzee(int numPlayers, bool computerPlayer){
     bool cpu = computerPlayer; 
