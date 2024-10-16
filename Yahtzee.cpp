@@ -1,9 +1,3 @@
-//remove includes
-#include <iostream>
-using namespace std;
-#include "Yahtzee.h"
-#include "Dice.h"
-
 void YahtzeePlayer::Cturn(){
     cout << "Computer turn!" << endl;
     Dice d1, d2, d3, d4, d5;
