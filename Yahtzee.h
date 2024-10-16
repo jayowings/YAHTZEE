@@ -5,7 +5,7 @@ enum LOWER{FULLHOUSE = 25, SMSTRAIGHT = 30, LGSTRAIGHT = 40, YAHTZEE = 50, BONUS
 class YahtzeePlayer{
     private:
         int ones, twos, threes, fours, fives, sixes;
-        int threeOfAKind, fourOfAKind, fullHouse, smallStaight, largeStraight, yahtzee, yahtzeeBonus, Chance;
+        int threeOfAKind, fourOfAKind, fullHouse, smallStraight, largeStraight, yahtzee, yahtzeeBonus, Chance;
         int upperTotal, lowerTotal, total;
         void chooseScore(int d1, int d2, int d3, int d4, int d5);
         YahtzeePlayer * turnorder;
