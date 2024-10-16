@@ -168,7 +168,7 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 if(!endTurn){
                     //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                     if(fourOfAKindt == -1){
-                        cout << "Four of a kind!" << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                        cout << "Four of a kind! " << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
                         cin >> takePoints;
                         if(takePoints != 'N' || takePoints != 'n'){
                             fourOfAKind = (d1 + d2 + d3 + d4 + d5);
@@ -191,6 +191,14 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                     }
                 }
                 //three of a kind
+                if(threeOfAKind == -1){
+                    cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
+                    cin >> takePoints;
+                    if(takePoints != 'N' || takePoints != 'n'){
+                        threeOfAKind = (d1+ d2 + d3 + d4 + d5);
+                        endTurn = true;
+                    }
+                }
             }
         }
         if(!endTurn){
@@ -209,7 +217,7 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(d4 == d5){
                 //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                 if(fourOfAKind == -1){
-                    cout << "Four of a kind!" << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                    cout << "Four of a kind! " << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
                     cin >> takePoints;
                     if(takePoints != 'N' || takePoints != 'n'){
                         fourOfAKind = (d1 + d2 + d3 + d4 + d5);
@@ -218,11 +226,27 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 }
                 if (!endTurn){
                 //three of a kind
+                if(threeOfAKind == -1){
+                    cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
+                    cin >> takePoints;
+                    if(takePoints != 'N' || takePoints != 'n'){
+                        threeOfAKind = (d1+ d2 + d3 + d4 + d5);
+                        endTurn = true;
+                    }
+                }
             }
         }
     }else if(d3 == d4){
         if(d4 == d5){
             //three of a kind
+            if(threeOfAKind == -1){
+                cout << "Three of a kind! " << (d1+ d2 + d3 + d4 + d5) << "points! Y/N";
+                cin >> takePoints;
+                if(takePoints != 'N' || takePoints != 'n'){
+                    threeOfAKind = (d1+ d2 + d3 + d4 + d5);
+                    endTurn = true;
+                }
+            }
         }
     }
         //display dice again and offer availble from this list "(C)hance:(value) (O)nes:(value) (t)wos:(value) (T)hrees:(value) (f)ours:(value) (F)ives:(value) (S)ixes:(value) or (Z)ero"
