@@ -123,8 +123,8 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             d5 = temp;
         }
     }
-    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) /*&& (LG Straight not NULL || SM Straight not NULL)*/){
-        if(d1 + 1 == d2 && d4 + 1 == d5 /*&& LG Straight not NULL*/){
+    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) && (largeStraight == -1 || smallStraight == -1)){
+        if(d1 + 1 == d2 && d4 + 1 == d5 && largeStraight == -1){
             cout << "Large Straight! 40 points! Y/N";
             cin >> takePoints;
             if(takePoints != 'N' || takePoints != 'n'){
@@ -132,7 +132,7 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 endTurn = true;
             }
             //LG Straight
-        }else /*if(SM Straight not NULL)*/{
+        }else if(smallStraight == -1){
             cout << "Small Straight! 30 points! Y/N";
             cin >> takePoints;
             if(takePoints != 'N' || takePoints != 'n'){
@@ -147,27 +147,23 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
         if(d2 == d3){
             if(d3 == d4){
                 if(d4 == d5){
-                    /*remove after not NULL logic complete*/
-                    int temp = yahtzee;
-
                     //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
                         // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
                     cout << "YAHTZEE!!"
-                    /*if(yahtzee not NULL){*/
+                    if(yahtzee == -1){
                         cout << "50 points! Y/N";
                         cin >> takePoints;
                         if(takePoints != 'N' || takePoints != 'n'){
                             yahtzee = YAHTZEE;
                             endTurn = true;
                         }
-                    //}
-                    /*else*/ if(/*yahtzee*/temp == 50){
+                    }
+                    else if(yahtzee == 50){
                         yahtzeeBonus += BONUS;
                         cout << "BONUS 100 POINTS!!" << endl;
-                        endTurn = false;
-                    }//else if(yahtzee == 0){
-                        //cout << ":.-( so sad." << endl;
-                    //}
+                    }else if(yahtzee == 0){
+                        cout << ":.-( so sad." << endl;
+                    }
                 }
                 if(!endTurn){
                     //four of a kind
