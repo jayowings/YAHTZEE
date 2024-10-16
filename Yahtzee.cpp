@@ -166,7 +166,15 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                     }
                 }
                 if(!endTurn){
-                    //four of a kind
+                    //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
+                    if(fourOfAKindt == -1){
+                        cout << "Four of a kind!" << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                        cin >> takePoints;
+                        if(takePoints != 'N' || takePoints != 'n'){
+                            fourOfAKind = (d1 + d2 + d3 + d4 + d5);
+                            endTurn = true;
+                        }
+                    }
                 }
             }
             if(!endTurn){
@@ -180,9 +188,16 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
     }else if(d2 == d3){
         if(d3 == d4){
             if(d4 == d5){
-                //four of a kind
-            }
-            if (!endTurn){
+                //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
+                if(fourOfAKind == -1){
+                    cout << "Four of a kind!" << (d1 + d2 + d3 + d4 + d5) << "points! Y/N";
+                    cin >> takePoints;
+                    if(takePoints != 'N' || takePoints != 'n'){
+                        fourOfAKind = (d1 + d2 + d3 + d4 + d5);
+                        endTurn = true;
+                    }
+                }
+                if (!endTurn){
                 //three of a kind
             }
         }
@@ -191,7 +206,6 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             //three of a kind
         }
     }
-        //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
         //if three dice are the same:
             //check full house. (if available, offer and end turn if chosen)
             //offer three of a kind
