@@ -134,7 +134,3 @@ void playYahtzee(int numPlayers, bool computerPlayer){
 void YahtzeePlayer::Cturn(){
 
 };
-
-int Dice::roll(){
-    this->value = rand() % 6;
-};

@@ -1,13 +1,6 @@
-
+#include "Dice.h"
 
 enum LOWER{FULLHOUSE = 25, SMSTRAIGHT = 30, LGSTRAIGHT = 40, YAHTZEE = 50, BONUS = 100, FAIL = 0, UPPERBONUS = 35};
-
-class Dice{
-    public:
-        int value;
-        bool save = false;
-        int roll();
-};
 
 class YahtzeePlayer{
     private:
