@@ -398,63 +398,182 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             cout << "or (Z)ero\n"
             cin >> takePoints;
         }else {takePoints = 'Z'};
-        switch (takePoints){
-            case 'C':{
-                if(chance == 0){
-                    cout << "Chance: " << total << ' points!' << endl;
-                    chance = total;
-                }else{
-                    takePoints = 'Z';
+        while(!endTurn){
+            switch (takePoints){
+                case 'C':{
+                    if(chance == 0){
+                        cout << "Chance: " << total << ' points!' << endl;
+                        chance = total;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 'o':{
+                    if(ones == -1 && o != 0){
+                        cout << "Ones: " << o << ' points!' << endl;
+                        ones = o;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 't':{
+                    if(twos == -1 && t != 0){
+                        cout << "Twos: " << t << ' points!' << endl;
+                        twos = t;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 'T':{
+                    if(threes == -1 && T != 0){
+                        cout << "Threes: " << T << ' points!' << endl;
+                        threes = T;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 'f':{
+                    if(fours == -1 && f != 0){
+                        cout << "Fours: " << f << ' points!' << endl;
+                        fours = f;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 'F':{
+                    if(fives == -1 && F != 0){
+                        cout << "Fives: " << F << ' points!' << endl;
+                        fives = F;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case 's':{
+                    if(sixes == -1 && s != 0){
+                        cout << "Sixes: " << s << ' points!' << endl;
+                        sixes = s;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                    break;
+                }case '3':{
+                    if(TP){
+                        cout << "3 of a kind: " << total << endl;
+                        threeOfAKind = total;
+                    }else if(threeOfAKind == -1){
+                        cout << "3 of a kind: " << FAIL << endl;
+                        threeOfAKind = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }case '4':{
+                    if(FP){
+                        cout << "4 of a kind: " << total << endl;
+                        fourOfAKind = total;
+                    }else if(fourOfAKind == -1){
+                        cout << "4 of a kind: " << FAIL << endl;
+                        fourOfAKind = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }case 'H':{
+                    if(FHP){
+                        cout << "Full House: " << FULLHOUSE << endl;
+                        fullHouse = FULLHOUSE;
+                    }else if(fullHouse == -1){
+                        cout << "Full House: " << FAIL << endl;
+                        fullHouse = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }case 'S':{
+                    if(SP){
+                        cout << "Small Straight: " << SMSTRAIGHT << endl;
+                        smallStraight = SMSTRAIGHT;
+                    }else if(smallStraight == -1){
+                        cout << "Small Straight: " << FAIL << endl;
+                        smallStraight = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }case 'L':{
+                    if(LP){
+                        cout << "Large Straight: " << LGSTRAIGHT << endl;
+                        largeStraight = LGSTRAIGHT;
+                    }else if(largeStraight == -1){
+                        cout << "Large Straight: " << FAIL << endl;
+                        largeStraight = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }case 'Y':{
+                    if(YP){
+                        cout << "Yahtzee: " << YAHTZEE << endl;
+                        yahtzee = YAHTZEE;
+                    }else if(yahtzee == -1){
+                        cout << "Yahtzee: " << FAIL << endl;
+                        yahtzee = FAIL;
+                    }else{
+                        takePoints = 'Z';
+                    }
+                }default:{
+                    cout << "Here are all your options again:\n"
+                    if(ones == -1){
+                        cout << "(o): " << o << ' ';
+                    }
+                    if(twos == -1){
+                        cout << "(t): " << t << ' ';
+                    }
+                    if(threes == -1){
+                        cout << "(T): " << T << ' ';
+                    }
+                    if(fours == -1){
+                        cout << "(f): " << f << ' ';
+                    }
+                    if(fives == -1){
+                        cout << "(F): " << F << ' ';
+                    }
+                    if(sixes == -1){
+                        cout << "(s): " << s << ' ';
+                    }
+                    cout << endl;
+                    if(TP){
+                        cout << "(3) of a kind: " << total << ' ';
+                    }else if(threeOfAKind == -1){
+                        cout << "(3) of a kind: " << FAIL << ' ';
+                    }
+                    if(FP){
+                        cout << "(4) of a kind: " << total << ' ';
+                    }else if(fourOfAKind == -1){
+                        cout << "(4) of a kind: " << FAIL << ' ';
+                    }
+                    if(FHP){
+                        cout << "Full (H)ouse: " << FULLHOUSE << ' ';
+                    }else if(fullHouse == -1){
+                        cout << "Full (H)ouse: " << FAIL << ' ';
+                    }
+                    cout << endl;
+                    if(SP){
+                        cout << "(S)mall Straight: " << SMSTRAIGHT << ' ';
+                    }else if(smallStraight == -1){
+                        cout << "(S)mall Straight: " << FAIL << ' ';
+                    }
+                    if(LP){
+                        cout << "(L)arge Straight: " << LGSTRAIGHT << ' ';
+                    }else if(largeStraight == -1){
+                        cout << "(L)arge Straight: " << FAIL << ' ';
+                    }
+                    cout << endl;
+                    if(YP){
+                        cout << "(Y)ahtzee: " << YAHTZEE << endl;
+                    }else if(yahtzee == -1){
+                        cout << "(Y)ahtzee: " << FAIL << endl;
+                    }
+                    if(chance == 0){
+                        cout << "(C)hance: " << total << endl;
+                    }
+                    cin >> takePoints
                 }
-                break;
-            }case 'o':{
-                if(ones == -1 && o != 0){
-                    cout << "Ones: " << o << ' points!' << endl;
-                    ones = o;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
-            }case 't':{
-                if(twos == -1 && t != 0){
-                    cout << "Twos: " << t << ' points!' << endl;
-                    twos = t;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
-            }case 'T':{
-                if(threes == -1 && T != 0){
-                    cout << "Threes: " << T << ' points!' << endl;
-                    threes = T;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
-            }case 'f':{
-                if(fours == -1 && f != 0){
-                    cout << "Fours: " << f << ' points!' << endl;
-                    fours = f;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
-            }case 'F':{
-                if(fives == -1 && F != 0){
-                    cout << "Fives: " << F << ' points!' << endl;
-                    fives = F;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
-            }case 's':{
-                if(sixes == -1 && s != 0){
-                    cout << "Sixes: " << s << ' points!' << endl;
-                    sixes = s;
-                }else{
-                    takePoints = 'Z';
-                }
-                break;
             }
         }
     }
