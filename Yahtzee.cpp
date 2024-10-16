@@ -177,13 +177,32 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                     }
                 }
             }
+            //if three dice are the same:
+            //check full house. (if available, offer and end turn if chosen)
+            //offer three of a kind
             if(!endTurn){
                 //Full house (d4 == d5)
+                if(d4 == d5 && fullHouse == -1){
+                    cout << "Full House! 25 points! Y/N";
+                    cin >> takePoints;
+                    if(takePoints != 'N' || takePoints != 'n'){
+                        fullHouse = FULLHOUSE;
+                        endTurn = true;
+                    }
+                }
                 //three of a kind
             }
         }
         if(!endTurn){
             //Full house (d3 == d4 == d5)
+            if(d3 == d4 && d4 == d5 && fullHouse == -1){
+                cout << "Full House! 25 points! Y/N";
+                cin >> takePoints;
+                if(takePoints != 'N' || takePoints != 'n'){
+                    fullHouse = FULLHOUSE;
+                    endTurn = true;
+                }
+            }
         }
     }else if(d2 == d3){
         if(d3 == d4){
@@ -206,9 +225,6 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             //three of a kind
         }
     }
-        //if three dice are the same:
-            //check full house. (if available, offer and end turn if chosen)
-            //offer three of a kind
         //display dice again and offer availble from this list "(C)hance:(value) (O)nes:(value) (t)wos:(value) (T)hrees:(value) (f)ours:(value) (F)ives:(value) (S)ixes:(value) or (Z)ero"
             //if none above available or (Z)ero chosen, display all other available options and choose where to take a zero. Run logic again for zero taken to avoid unnecessarry zeros
 };
