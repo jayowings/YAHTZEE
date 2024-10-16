@@ -1,4 +1,7 @@
+#include <iostream>
+using namespace std;
 #include "Yahtzee.h"
+#include "Dice.h"
 
 void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functions
     cout << name << ", your turn!" << endl;
@@ -96,6 +99,8 @@ void YahtzeePlayer::endGame(){
 void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
     //sort dice in ascending order with temp variables. check sm straight or lg straight (if available, set and end turn)
     int temp;
+    char takePoints;
+    bool endTurn;
     while(d1 > d2 || d2 > d3 || d3 > d4 || d4 > d5){
         if(d1 > d2){
             temp = d1;
@@ -118,6 +123,25 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             d5 = temp;
         }
     }
+    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) /*&& (LG Straight not NULL || SM Straight not NULL)*/){
+        if(d1 + 1 == d2 && d4 + 1 == d5 /*&& LG Straight not NULL*/){
+            cout << "Large Straight! 40 points! Y/N";
+            cin >> takePoints;
+            if(takePoints != 'N' || takePoints != 'n'){
+                largeStraight = LGSTRAIGHT;
+                endTurn = true;
+            }
+            //LG Straight
+        }else /*if(SM Straight not NULL)*/{
+            cout << "Small Straight! 30 points! Y/N";
+            cin >> takePoints;
+            if(takePoints != 'N' || takePoints != 'n'){
+                smallStraight = SMSTRAIGHT;
+                endTurn = true;
+            }
+            //SM Straight
+        }
+    }
     //check number of same type dice
         //if all dice are the same and Yahtzee has not been set to 0 or 50, yahtzee = 50. End turn
             // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
@@ -126,7 +150,7 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             //check full house. (if available, offer and end turn if chosen)
             //offer three of a kind
         //display dice again and offer availble from this list "(C)hance:(value) (O)nes:(value) (t)wos:(value) (T)hrees:(value) (f)ours:(value) (F)ives:(value) (S)ixes:(value) or (Z)ero"
-            //if none above available or (Z)ero chosen, display all other available options and choose where to take a zero
+            //if none above available or (Z)ero chosen, display all other available options and choose where to take a zero. Run logic again for zero taken to avoid unnecessarry zeros
 };
 
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
