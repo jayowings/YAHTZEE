@@ -5,17 +5,17 @@ enum LOWER{FULLHOUSE = 25, SMSTRAIGHT = 30, LGSTRAIGHT = 40, YAHTZEE = 50, BONUS
 class YahtzeePlayer{
     private:
         int ones, twos, threes, fours, fives, sixes;
-        int threeOfAKind, fourOfAKind, fullHouse, smallStraight, largeStraight, yahtzee, yahtzeeBonus, Chance;
+        int threeOfAKind = -1, fourOfAKind = -1, fullHouse = -1, smallStraight = -1, largeStraight = -1, yahtzee = -1, yahtzeeBonus, Chance;
         int upperTotal, lowerTotal, total;
-        void chooseScore(int d1, int d2, int d3, int d4, int d5);
         YahtzeePlayer * turnorder;
         bool endPlayer;
+        void Cturn();
+        void chooseScore(int d1, int d2, int d3, int d4, int d5);
     public:
         string name;
-        int turnsToGo = 13;
         bool computer;
+        int turnsToGo = 13;
         void Pturn();
-        void Cturn();
         void endGame();
         YahtzeePlayer(int numPlayers, bool &computerPlayer);
 };
