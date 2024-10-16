@@ -1,3 +1,3 @@
-int Dice::roll(){
-    this->value = rand() % 6;
+void Dice::roll(){
+    this->value = (rand() % 6) + 1;
 };

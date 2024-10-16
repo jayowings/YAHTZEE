@@ -2,7 +2,7 @@ class Dice{
     public:
         int value;
         bool save = false;
-        int roll();
+        void roll();
 };
 
 #include "Dice.cpp"
