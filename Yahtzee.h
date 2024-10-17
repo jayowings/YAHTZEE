@@ -22,4 +22,6 @@ class YahtzeePlayer{
 
 void playYahtzee(int numPlayers, bool computerPlayer);
 
+int notNull(int score);
+
 #include "Yahtzee.cpp"
