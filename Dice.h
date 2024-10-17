@@ -2,7 +2,7 @@ class Dice{
     public:
         int value;
         bool save = false;
-        void roll();
+        void roll(){
+            this->value = (rand() % 6) + 1;
+        };
 };
-
-#include "Dice.cpp"
