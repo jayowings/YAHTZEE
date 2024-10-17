@@ -40,7 +40,7 @@ void YahtzeePlayer::Cturn(){
                 d5.value = temp;
             }
         }
-        //TODO Decide which dice to save
+        //Decide which dice to save
         if(d1.value == d5.value){//Yahtzee
             break;
         }else if(d2.value == d5.value && d1.value){//Four of a Kind, hoping for Yahtzee
@@ -108,8 +108,21 @@ void YahtzeePlayer::Cturn(){
     bool endTurn = false;
     bool TP = false, FP = false;
     //Decide which score to take
-    if(d2.value + 1 == d3.value && d3.value + 1 == d4.value && (d1.value + 1 == d2.value || d4.value + 1 == d5.value) && (largeStraight == -1 || smallStraight == -1)){
-        if(d1.value + 1 == d2.value && d4.value + 1 == d5.value && largeStraight == -1){
+    temp = 0;
+    if(d1 + 1 == d2){
+        temp++;
+    }
+    if(d2 + 1 == d3){
+        temp++;
+    }
+    if(d3 + 1 == d4){
+        temp++;
+    }
+    if(d4 + 1 == d5){
+        temp++;
+    }
+    if(temp >= 3 && (largeStraight == -1 || smallStraight == -1)){
+        if(temp == 4 && largeStraight == -1){
             largeStraight = LGSTRAIGHT; //Large Straight
             endTurn = true;
         }else if(smallStraight == -1){
@@ -408,11 +421,24 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             d5 = temp;
         }
     }
-    if(d2 + 1 == d3 && d3 + 1 == d4 && (d1 + 1 == d2 || d4 + 1 == d5) && (largeStraight == -1 || smallStraight == -1)){
-        if(d1 + 1 == d2 && d4 + 1 == d5 && largeStraight == -1){
-            cout << "Large Straight! 40 points! Y/N";
+    temp = 0;
+    if(d1 + 1 == d2){
+        temp++;
+    }
+    if(d2 + 1 == d3){
+        temp++;
+    }
+    if(d3 + 1 == d4){
+        temp++;
+    }
+    if(d4 + 1 == d5){
+        temp++;
+    }
+    if(temp >= 3 && (largeStraight == -1 || smallStraight == -1)){
+        if(temp == 4 && largeStraight == -1){
+            cout << "Large Straight! 40 points! Y/N ";
             cin >> takePoints;
-            if(takePoints != 'N' || takePoints != 'n'){
+            if(takePoints != 'N' && takePoints != 'n'){
                 largeStraight = LGSTRAIGHT;
                 endTurn = true;
             }else{
@@ -423,9 +449,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             }
             //LG Straight
         }else if(smallStraight == -1){
-            cout << "Small Straight! 30 points! Y/N";
+            cout << "Small Straight! 30 points! Y/N ";
             cin >> takePoints;
-            if(takePoints != 'N' || takePoints != 'n'){
+            if(takePoints != 'N' && takePoints != 'n'){
                 smallStraight = SMSTRAIGHT;
                 endTurn = true;
             }else{
@@ -444,9 +470,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                         // if all dice are the same and Yahtzee is 50, add Yahtzee bonus, but don't end turn
                     cout << "YAHTZEE!!";
                     if(yahtzee == -1){
-                        cout << "50 points! Y/N";
+                        cout << "50 points! Y/N ";
                         cin >> takePoints;
-                        if(takePoints != 'N' || takePoints != 'n'){
+                        if(takePoints != 'N' && takePoints != 'n'){
                             yahtzee = YAHTZEE;
                             endTurn = true;
                         }else{
@@ -463,9 +489,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 if(!endTurn){
                     //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                     if(fourOfAKind == -1){
-                        cout << "Four of a kind! " << total << " points! Y/N";
+                        cout << "Four of a kind! " << total << " points! Y/N ";
                         cin >> takePoints;
-                        if(takePoints != 'N' || takePoints != 'n'){
+                        if(takePoints != 'N' && takePoints != 'n'){
                             fourOfAKind = total;
                             endTurn = true;
                         }else{
@@ -480,21 +506,21 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(!endTurn){
                 //Full house (d4 == d5)
                 if(d4 == d5 && fullHouse == -1){
-                    cout << "Full House! 25 points! Y/N";
+                    cout << "Full House! 25 points! Y/N ";
                     cin >> takePoints;
-                    if(takePoints != 'N' || takePoints != 'n'){
+                    if(takePoints != 'N' && takePoints != 'n'){
                         fullHouse = FULLHOUSE;
                         endTurn = true;
-                    }else {
+                    }else{
                         FHP = true;
                     }
                 }
                 //three of a kind
                 if(!endTurn){
                     if(threeOfAKind == -1){
-                       cout << "Three of a kind! " << total << "points! Y/N";
+                       cout << "Three of a kind! " << total << " points! Y/N ";
                         cin >> takePoints;
-                        if(takePoints != 'N' || takePoints != 'n'){
+                        if(takePoints != 'N' && takePoints != 'n'){
                            threeOfAKind = total;
                             endTurn = true;
                         }else {
@@ -507,9 +533,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
         if(!endTurn){
             //Full house (d3 == d4 == d5)
             if(d3 == d4 && d4 == d5 && fullHouse == -1){
-                cout << "Full House! 25 points! Y/N";
+                cout << "Full House! 25 points! Y/N ";
                 cin >> takePoints;
-                if(takePoints != 'N' || takePoints != 'n'){
+                if(takePoints != 'N' && takePoints != 'n'){
                     fullHouse = FULLHOUSE;
                     endTurn = true;
                 }else{
@@ -522,9 +548,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
             if(d4 == d5){
                 //if four dice are the same, display and offer four of a kind if available (end turn if chosen)
                 if(fourOfAKind == -1){
-                    cout << "Four of a kind! " << total << " points! Y/N";
+                    cout << "Four of a kind! " << total << " points! Y/N ";
                     cin >> takePoints;
-                    if(takePoints != 'N' || takePoints != 'n'){
+                    if(takePoints != 'N' && takePoints != 'n'){
                         fourOfAKind = total;
                         endTurn = true;
                     }else{
@@ -534,9 +560,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
                 if(!endTurn){
                 //three of a kind
                     if(threeOfAKind == -1){
-                        cout << "Three of a kind! " << total << "points! Y/N";
+                        cout << "Three of a kind! " << total << " points! Y/N ";
                         cin >> takePoints;
-                        if(takePoints != 'N' || takePoints != 'n'){
+                        if(takePoints != 'N' && takePoints != 'n'){
                             threeOfAKind = total;
                             endTurn = true;
                         }else{
@@ -550,9 +576,9 @@ void YahtzeePlayer::chooseScore(int d1, int d2, int d3, int d4, int d5){
         if(d4 == d5){
             //three of a kind
             if(threeOfAKind == -1){
-                cout << "Three of a kind! " << total << "points! Y/N";
+                cout << "Three of a kind! " << total << " points! Y/N ";
                 cin >> takePoints;
-                if(takePoints != 'N' || takePoints != 'n'){
+                if(takePoints != 'N' && takePoints != 'n'){
                     threeOfAKind = total;
                     endTurn = true;
                 }else{
@@ -945,11 +971,13 @@ void YahtzeePlayer::Pturn(){ //roll logic and save dice logic, call other functi
         }
     }
     chooseScore(d1.value, d2.value, d3.value, d4.value, d5.value);
-    if(turnorder->computer){//Computer turn will have its own logic
-        turnorder->Cturn();
-    }else if(!endPlayer){
-        turnorder->Pturn();//each player will take their turn in order, 
-    }
+     if(!endPlayer){
+        if(turnorder->computer){//Computer turn will have its own logic
+            turnorder->Cturn();
+        }else{
+            turnorder->Pturn();//each player will take their turn in order, 
+        }
+     }
 };
 
 void YahtzeePlayer::endGame(){
@@ -960,31 +988,31 @@ void YahtzeePlayer::endGame(){
     }
     lowerTotal = threeOfAKind + fourOfAKind + fullHouse + smallStraight + largeStraight + yahtzee + yahtzeeBonus + chance;
     total = upperTotal + lowerTotal;
-    cout << setw(16) << left << name << endl;
-    cout << "Ones:_____________" << ones << endl;
-    cout << "Twos:____________" << setw(2) << left << setfill('_') << twos << endl;
-    cout << "Threes:__________" << setw(2) << left << setfill('_') << threes << endl;
-    cout << "Fours:___________" << setw(2) << left << setfill('_') << fours << endl;
-    cout << "Fives:___________" << setw(2) << left << setfill('_') << fives << endl;
-    cout << "Sixes:___________" << setw(2) << left << setfill('_') << sixes << endl;
+    cout <<  name << endl;
+    cout << "Ones:____________" << setw(2) << right << setfill('_') << ones << endl;
+    cout << "Twos:____________" << setw(2) << right << setfill('_') << twos << endl;
+    cout << "Threes:__________" << setw(2) << right << setfill('_') << threes << endl;
+    cout << "Fours:___________" << setw(2) << right << setfill('_') << fours << endl;
+    cout << "Fives:___________" << setw(2) << right << setfill('_') << fives << endl;
+    cout << "Sixes:___________" << setw(2) << right << setfill('_') << sixes << endl;
     if(upperTotal > 63){
         cout << "BONUS!!" << endl;
     }
-    cout << "Upper Total:____" << setw(3) << left << setfill('_') << upperTotal << endl;
-    cout << "Three of a Kind:_" << setw(2) << left << setfill('_') << threeOfAKind << endl;
-    cout << "Four of a Kind:__" << setw(2) << left << setfill('_') << fourOfAKind << endl;
-    cout << "Full House:______" << setw(2) << left << setfill('_') << fullHouse << endl;
-    cout << "SM Straight:_____" << setw(2) << left << setfill('_') << smallStraight << endl;
-    cout << "LG Straight:_____" << setw(2) << left << setfill('_') << largeStraight << endl;
-    cout << "Yahtzee:_________" << setw(2) << left << setfill('_') << yahtzee << endl;
+    cout << "Upper Total:____" << setw(3) << right << setfill('_') << upperTotal << endl;
+    cout << "Three of a Kind:_" << setw(2) << right << setfill('_') << threeOfAKind << endl;
+    cout << "Four of a Kind:__" << setw(2) << right << setfill('_') << fourOfAKind << endl;
+    cout << "Full House:______" << setw(2) << right << setfill('_') << fullHouse << endl;
+    cout << "SM Straight:_____" << setw(2) << right << setfill('_') << smallStraight << endl;
+    cout << "LG Straight:_____" << setw(2) << right << setfill('_') << largeStraight << endl;
+    cout << "Yahtzee:_________" << setw(2) << right << setfill('_') << yahtzee << endl;
     if(yahtzee != 0){
-        cout << "Yahtzee Bonus:___" << setw(3) << left << setfill('_') << yahtzeeBonus << endl;
+        cout << "Yahtzee Bonus:__" << setw(3) << right << setfill('_') << yahtzeeBonus << endl;
     }
-    cout << "Chance:__________" << setw(2) << left << setfill('_') << chance << endl;
-    cout << "Lower Total:____" << setw(3) << left << setfill('_') << lowerTotal << endl;
-    cout << "Total:_________" << setw(4) << left << setfill('_') << total << endl;
+    cout << "Chance:__________" << setw(2) << right << setfill('_') << chance << endl;
+    cout << "Lower Total:____" << setw(3) << right << setfill('_') << lowerTotal << endl;
+    cout << "Total:_________" << setw(4) << right << setfill('_') << total << endl;
     cin >> done;
-    if(!endPlayer || !computer){
+    if(!endPlayer && !computer){
         turnorder->endGame();
     }
 }; //calculating totals
