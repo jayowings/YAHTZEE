@@ -5,8 +5,8 @@ enum LOWER{FULLHOUSE = 25, SMSTRAIGHT = 30, LGSTRAIGHT = 40, YAHTZEE = 50, BONUS
 class YahtzeePlayer{
     private:
         int ones = -1, twos = -1, threes = -1, fours = -1, fives = -1, sixes = -1;
-        int threeOfAKind = -1, fourOfAKind = -1, fullHouse = -1, smallStraight = -1, largeStraight = -1, yahtzee = -1, yahtzeeBonus, chance;
-        int upperTotal, lowerTotal, total;
+        int threeOfAKind = -1, fourOfAKind = -1, fullHouse = -1, smallStraight = -1, largeStraight = -1, yahtzee = -1, yahtzeeBonus = 0, chance = 0;
+        int upperTotal = 0, lowerTotal = 0, total = 0;
         YahtzeePlayer * turnorder;
         bool endPlayer;
         void Cturn();
