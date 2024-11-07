@@ -1,3 +1,10 @@
+#include <iostream>
+#include <cctype>
+#include <string>
+#include <iomanip>
+
+using namespace std;
+
 #include "Dice.h"
 
 enum LOWER{FULLHOUSE = 25, SMSTRAIGHT = 30, LGSTRAIGHT = 40, YAHTZEE = 50, BONUS = 100, FAIL = 0, UPPERBONUS = 35};
