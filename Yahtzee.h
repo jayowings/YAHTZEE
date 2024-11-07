@@ -38,4 +38,4 @@ void YahtzeeSetUp(int& gamesWon);
 
 int notNull(int score);
 
-//#include "Yahtzee.cpp"
+#include "Yahtzee.cpp"

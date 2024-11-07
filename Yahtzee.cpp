@@ -1,6 +1,3 @@
-#include "Yahtzee.h"
-using namespace std;
-
 void YahtzeePlayer::Cturn(){    
     cout << "Computer turn!" << endl;
     Dice d1, d2, d3, d4, d5;
