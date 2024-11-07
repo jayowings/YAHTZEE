@@ -1,3 +1,6 @@
+#include "Yahtzee.h"
+using namespace std;
+
 void YahtzeePlayer::Cturn(){    
     cout << "Computer turn!" << endl;
     Dice d1, d2, d3, d4, d5;
@@ -1053,6 +1056,21 @@ void YahtzeePlayer::endGame(){
     }
 }; //calculating totals
 
+string YahtzeePlayer:: winner(){
+    YahtzeePlayer * max = this;
+    YahtzeePlayer * runner = this->turnorder;
+    while(!runner->endPlayer){
+        if(max->total < runner->total){
+            max = runner;
+        }
+        runner = runner->turnorder;
+    }
+    if(max->total < runner->total){
+        max = runner;
+    }
+    return max->name;
+}
+
 YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
     if (numPlayers > 1){
         cout << "Player name: "; //Get player name
@@ -1073,14 +1091,32 @@ YahtzeePlayer::YahtzeePlayer(int  numPlayers, bool &computerPlayer){
     }
 };
 
-void playYahtzee(int numPlayers, bool computerPlayer){
+void playYahtzee(int numPlayers, bool computerPlayer, int& gamesWon){
     bool cpu = computerPlayer; 
     YahtzeePlayer Game1(numPlayers, cpu);
     for(Game1.turnsToGo; Game1.turnsToGo != 0; Game1.turnsToGo--){
         Game1.Pturn();
         Game1.endGame();
     };
+    string winner = Game1.winner();
+    if(winner != "Computer"){
+        gamesWon++;
+    }
 };
+
+void YahtzeeSetUp(int& gamesWon){
+    cout << "Welcome to Yahtzee!\n";
+    cout << "How many players? ";
+    cin >> numPlayers;
+    cout << "Computer player? Y/N ";
+    cin >> cpu;
+    if (cpu == 'N' || cpu == 'n'){
+        computer = false;
+    }else{
+        computer = true;
+    }
+    playYahtzee(numPlayers, computer, gamesWon);
+}
 
 int notNull(int score){
     if(score == -1){

@@ -24,11 +24,18 @@ class YahtzeePlayer{
         int turnsToGo = 13;
         void Pturn();
         void endGame();
+        string winner();
         YahtzeePlayer(int numPlayers, bool &computerPlayer);
 };
 
-void playYahtzee(int numPlayers, bool computerPlayer);
+bool computer;
+int numPlayers;
+char cpu;
+
+void playYahtzee(int numPlayers, bool computerPlayer, int& gamesWon);
+
+void YahtzeeSetUp(int& gamesWon);
 
 int notNull(int score);
 
-#include "Yahtzee.cpp"
+//#include "Yahtzee.cpp"
